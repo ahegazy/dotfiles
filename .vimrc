@@ -1,13 +1,10 @@
-set runtimepath+=~/.vim_runtime
+set runtimepath+=~/.vimrcs
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+source ~/.vimrcs/basic.vim
+source ~/.vimrcs/filetypes.vim
+source ~/.vimrcs/plugins_config.vim
+source ~/.vimrcs/extended.vim
 set number
-try
-source ~/.vim_runtime/my_configs.vim
-catch
-endtry
+
 hi Normal guibg=NONE ctermbg=NONE
 
