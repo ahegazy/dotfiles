@@ -110,9 +110,9 @@ set $ws1 "1: Terminals"
 set $ws2 "2: Firefox"
 set $ws3 "3: VScode"
 set $ws4 "4: Files"
-set $ws5 "5: opera"
+set $ws5 "5: social"
 set $ws6 "6: vlc"
-set $ws7 "7"
+set $ws7 "7: other"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -235,4 +235,8 @@ bindsym XF86AudioPrev exec playerctl previous
 exec i3-sensible-terminal # run terminal at startup
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.jpg #change wallpaper
 exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
+
+#connect to wifi
+#exec nmcli connect delete myNetword #delete existing connection, doesnot work without it
+#exec nmcli device wifi connect myNetwork password "mySecurePassword" #reconnect 
 
