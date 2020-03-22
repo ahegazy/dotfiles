@@ -26,12 +26,12 @@ order += "tztime local"
 
 wireless _first_ {
         
-        format_up = "W: (%quality at %essid) %ip"
+        format_up = "🌍(%quality at %essid) %ip"
         format_down = "W: down"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip"
+        format_up = "🖧 %ip"
         format_down = "E: down"
 }
 
@@ -50,7 +50,7 @@ battery all {
 #}
 
 disk "/" {
-        format = "Disk: %avail"
+        format = "🖴 %avail"
 }
 
 #load {
@@ -60,28 +60,28 @@ disk "/" {
 
 read_file NETRATE {
     format = "%content"
-    path = "~/.config/netrate"
+    path = "/home/ahmad/.config/netrate"
 }
 read_file BRIGHTNESS {
-    format = "BRI %content%"
-    path = "~/.config/brightness"
+    format = " %content%"
+    path = "/home/ahmad/.config/brightness"
     max_characters = 5
 }
 memory {
-        format = "Mem: %used"
+        format = "☵ %used"
         threshold_degraded = "20%"
         format_degraded = "MEMORY < %available"
 }
 
 cpu_usage {
-    format="CPU: %usage"
+    format="🧠 %usage"
     max_threshold = 75
 }
 
 volume master {
         device = "pulse"
-        format = "♪: %volume"
-        format_muted = "♪: muted (%volume)"
+        format = "🔉 %volume"
+        format_muted = "🔇 muted (%volume)"
         mixer = "Master"
         mixer_idx = 0
 }
@@ -89,3 +89,5 @@ volume master {
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
 }
+
+

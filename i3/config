@@ -141,6 +141,11 @@ bindsym $mod+Mod2+KP_8 workspace number $ws8
 bindsym $mod+Mod2+KP_9 workspace number $ws9
 bindsym $mod+Mod2+KP_0 workspace number $ws10
 
+#previous and next workspaces 
+bindsym $mod+Mod2+KP_Add workspace next
+bindsym $mod+Mod2+KP_Subtract workspace prev
+bindsym $mod+Mod2+KP_Enter workspace back_and_forth
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
