@@ -237,6 +237,5 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.jpg #change wallp
 exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
 
 #connect to wifi
-#exec nmcli connect delete myNetword #delete existing connection, doesnot work without it
-#exec nmcli device wifi connect myNetwork password "mySecurePassword" #reconnect 
+exec_always /home/ahmad/exec/internet.sh
 
