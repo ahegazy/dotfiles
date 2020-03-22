@@ -129,6 +129,18 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+# switch to workspace using keypad # wasnot working for $mod+KPx, issue: https://github.com/i3/i3/issues/2558#issuecomment-260149625 
+bindsym $mod+Mod2+KP_1 workspace number $ws1
+bindsym $mod+Mod2+KP_2 workspace number $ws2
+bindsym $mod+Mod2+KP_3 workspace number $ws3
+bindsym $mod+Mod2+KP_4 workspace number $ws4
+bindsym $mod+Mod2+KP_5 workspace number $ws5
+bindsym $mod+Mod2+KP_6 workspace number $ws6
+bindsym $mod+Mod2+KP_7 workspace number $ws7
+bindsym $mod+Mod2+KP_8 workspace number $ws8
+bindsym $mod+Mod2+KP_9 workspace number $ws9
+bindsym $mod+Mod2+KP_0 workspace number $ws10
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -247,5 +259,5 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.jpg #change wallp
 exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
 
 #connect to wifi
-exec_always ~/exec/internet.sh
-exec ~/exec/netspeed.sh
+exec_always /home/ahmad/exec/internet.sh
+exec /home/ahmad/exec/netspeed.sh
