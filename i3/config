@@ -249,8 +249,8 @@ bar {
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > /home/ahmad/.config/brightness && $refresh_i3status # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 && xbacklight -get > /home/ahmad/.config/brightness && $refresh_i3status # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > ~/.config/brightness && $refresh_i3status # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 && xbacklight -get > ~/.config/brightness && $refresh_i3status # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -258,11 +258,20 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# toggle layout arabic/english 
+# Binding sym alt + key doesnot work as alt is consideret mod1
+# using bindcode doesnot take multiple number :(
+#bindcode 64+50 exec ~/exec/togglelayout.sh #Alt_L+Shift_L
+#bindcode 108+62 exec ~/exec/togglelayout.sh #Alt_R+Shift_R
+#bindsym Mod1+Shift exec ~/exec/togglelayout.sh
+
 #startup 
 exec i3-sensible-terminal # run terminal at startup
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.jpg #change wallpaper
-exec_always "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
+exec "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
 
 #connect to wifi
-exec_always /home/ahmad/exec/internet.sh
-exec /home/ahmad/exec/netspeed.sh
+exec_always ~/exec/internet.sh
+exec ~/exec/netspeed.sh
+
+
