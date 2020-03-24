@@ -14,7 +14,8 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font pango:System San Francisco Display 8
+#font pango:System San Francisco Display 8
+font pango:simpofx 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -48,7 +49,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show combi
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -107,15 +110,15 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Terminals"
-set $ws2 "2: Firefox"
-set $ws3 "3: VScode"
+set $ws2 "2: B1"
+set $ws3 "3: Editor"
 set $ws4 "4: Files"
-set $ws5 "5: social"
-set $ws6 "6: vlc"
+set $ws5 "5: B2"
+set $ws6 "6: media"
 set $ws7 "7: other"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws8 "8: misc"
+set $ws9 "9: misc"
+set $ws10 "10: misc"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -158,12 +161,25 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# move focused container to workspace using keypad # 
+bindsym $mod+Shift+KP_1 move container to workspace number $ws1
+bindsym $mod+Shift+KP_2 move container to workspace number $ws2
+bindsym $mod+Shift+KP_3 move container to workspace number $ws3
+bindsym $mod+Shift+KP_4 move container to workspace number $ws4
+bindsym $mod+Shift+KP_5 move container to workspace number $ws5
+bindsym $mod+Shift+KP_6 move container to workspace number $ws6
+bindsym $mod+Shift+KP_7 move container to workspace number $ws7
+bindsym $mod+Shift+KP_8 move container to workspace number $ws8
+bindsym $mod+Shift+KP_9 move container to workspace number $ws9
+bindsym $mod+Shift+KP_0 move container to workspace number $ws10
+
 #assign apps to workspaces
 assign [class="dolphin"] $ws4
 assign [class="firefox"] $ws2
 assign [class="code-oss"] $ws3 #visual studio code
-assign [class="Opera"] $ws5 
+#assign [class="Opera"] $ws5 
 assign [class="vlc"] $ws6 
+assign [class="JDownloader"] $ws4
 
 # move focus to the workspace when app opens
 #for_window [class="."] focus 
@@ -174,7 +190,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -229,7 +246,7 @@ bar {
 	#status_command i3blocks
     #status_command exec /home/ahmad/exec/netspeed.sh
     
-    #position top
+    position top
     #mode hide
     output primary
     #tray_output none 
@@ -249,8 +266,8 @@ bar {
 bindsym $mod+shift+x exec i3lock --color "$bg-color"
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > ~/.config/brightness && $refresh_i3status # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 && xbacklight -get > ~/.config/brightness && $refresh_i3status # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -261,17 +278,17 @@ bindsym XF86AudioPrev exec playerctl previous
 # toggle layout arabic/english 
 # Binding sym alt + key doesnot work as alt is consideret mod1
 # using bindcode doesnot take multiple number :(
-#bindcode 64+50 exec ~/exec/togglelayout.sh #Alt_L+Shift_L
-#bindcode 108+62 exec ~/exec/togglelayout.sh #Alt_R+Shift_R
-#bindsym Mod1+Shift exec ~/exec/togglelayout.sh
+#bindcode 64+50 exec $HOME/exec/togglelayout.sh #Alt_L+Shift_L
+#bindcode 108+62 exec $HOME/exec/togglelayout.sh #Alt_R+Shift_R
+#bindsym Mod1+Shift exec $HOME/exec/togglelayout.sh
 
 #startup 
 exec i3-sensible-terminal # run terminal at startup
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.jpg #change wallpaper
+exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper.jpg #change wallpaper
 exec "setxkbmap -model pc104 -layout us,ar -variant ,, -option grp:alt_shift_toggle -option grp:alt_shift_right_toggle" #switch between arabic/english
 
 #connect to wifi
-exec_always ~/exec/internet.sh
-exec ~/exec/netspeed.sh
+exec_always $HOME/exec/internet.sh
+exec $HOME/exec/netspeed.sh
 
 
