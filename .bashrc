@@ -4,7 +4,7 @@
 
 [[ $- != *i* ]] && return
 
-alias vi="vim"
+
 colors() {
 	local fgc bgc vals seq0
 
@@ -138,6 +138,8 @@ ex ()
   fi
 }
 
+alias vi="vim"
 alias ll='ls -lah'
 alias stopTor='sudo systemctl stop tor && sudo killall -9 tor'
 alias reTor='stopTor ; sudo systemctl start tor'
+PATH=$PATH:$HOME/.local/bin

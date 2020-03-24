@@ -4,10 +4,6 @@
 # - Moritz Warning <moritzwarning@web.de> (2016)
 # - Zhong Jianxin <azuwis@gmail.com> (2014)
 #
-# SOURCE: https://github.com/i3/i3status/tree/master/contrib
-#
-# Modified to output the rate to a file
-#
 # See file LICENSE at the project root directory for license information.
 #
 # i3status.conf should contain:
@@ -28,7 +24,8 @@
 #
 
 # Auto detect interfaces
-ifaces=$(ls /sys/class/net | grep -E '^(eth|wlan|enp|wlp)')
+#ifaces=$(ls /sys/class/net | grep -E '^(eth|wlan|enp|wlp)')
+ifaces="enp14s0 wlo1"
 
 last_time=0
 last_rx=0
@@ -79,9 +76,9 @@ while :
 do
     update_rate
     echo $rate > ~/.config/netrate
-    sleep 1
-done
 
+    sleep 3
+done
 # i3status | (read line && echo "$line" && read line && echo "$line" && read line && echo "$line" && update_rate && while :
 # do
 #  read line

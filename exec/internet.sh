@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [[ -z `nmcli con show --active | grep ethernet` ]] #if ethernet is not active connect to wifi
+if [[ -z `nmcli con show --active | grep ethernet` ]]
 then
+    # nmcli connect delete MyNetwork #delete existing connection
     nmcli radio wifi on
-    # nmcli connect delete myNetwork #delete existing connection, doesnot work without it
-    nmcli device wifi connect myNetwork password MyComplexPass #reconnect
+    # nmcli device wifi connect MyNetwork password "MYPASS" #reconnect
 else
     nmcli radio wifi off
 fi

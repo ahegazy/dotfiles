@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Single interface:
+# ifaces="eth0"
+#
+# Multiple interfaces:
+# ifaces="eth0 wlan0"
+#
+
+# Auto detect interfaces
+ifaces=$(ls /sys/class/net | grep -E '^(eth|wlan|enp|wlp|wlo)')
+
+
+readable() {
+  local bytes=$1
+  local kib=$(( bytes >> 10 ))
+  local mib=$(( kib >> 10 ))
+  if [ $kib -lt 0 ]; then
+    echo "? K"
+  elif [[ $kib -gt 1024 && $mib -lt 1024 ]]; then
+    local mib_int=$(( kib >> 10 ))
+    local mib_dec=$(( kib % 1024 * 976 / 10000 ))
+    if [ "$mib_dec" -lt 10 ]; then
+      mib_dec="0${mib_dec}"
+    fi
+    echo "${mib_int}.${mib_dec} M"
+  elif [ $mib -ge 1024 ]
+  then
+    local gib_int=$(( mib >> 10 ))
+    local gib_dec=$(( mib % 1024 * 976 / 10000 ))
+    if [ "$gib_dec" -lt 10 ]; then
+      gib_dec="0${gib_dec}"
+    fi
+    echo "${gib_int}.${gib_dec} G"
+  else
+    echo "${kib} K"
+  fi
+}
+
+get_stat() {
+  local rx=0 tx=0 tmp_rx tmp_tx
+
+  for iface in $ifaces; do
+    read rx < "/sys/class/net/${iface}/statistics/rx_bytes"
+    read tx < "/sys/class/net/${iface}/statistics/tx_bytes"
+    if [[ $rx > 0 || $tx > 0 ]] 
+    then
+        echo "$iface $(readable ${rx})↓ $(readable ${tx})↑"
+    fi 
+done
+}
+
+echo uptime: $(uptime -p) 
+get_stat
+
+
