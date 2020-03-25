@@ -277,10 +277,10 @@ bindsym XF86AudioPrev exec playerctl previous
 
 #print screen when prtscr key is pressed, show a bar with options delete image, view image, and kill the nagbar when either is pressed
 #print part of screen 
-bindsym --release Print exec --no-startup-id scrot -s -f '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/shots/ && i3-nagbar -t warning -m "image saved at ~/Pictures/shots/$f" -B "view image?" "feh ~/Pictures/shots/$f && killall -9 i3-nagbar" -B "delete image?" "rm ~/Pictures/shots/$f && killall -9 i3-nagbar"'
+bindsym --release Print exec --no-startup-id scrot -s -f ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -9 i3-nagbar" -B "delete image?" "rm $f && killall -9 i3-nagbar"'
 
 #print fullscreen  
-bindsym --release $mod+Print exec --no-startup-id scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/shots/ && i3-nagbar -t warning -m "image saved at ~/Pictures/shots/$f" -B "view image?" "feh ~/Pictures/shots/$f && killall -9 i3-nagbar" -B "delete image?" "rm ~/Pictures/shots/$f && killall -9 i3-nagbar"'
+bindsym --release $mod+Print exec --no-startup-id scrot ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -9 i3-nagbar" -B "delete image?" "rm $f && killall -9 i3-nagbar"'
 
 # toggle layout arabic/english 
 # Binding sym alt + key doesnot work as alt is consideret mod1
