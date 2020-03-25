@@ -1,0 +1,14 @@
+[Unit]
+Description=store usage statistics before shutdown and reboot
+DefaultDependencies=no
+Before=shutdown.target reboot.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=/home/%i/.local/bin/logNetstat
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+picsPATH=$HOME/Pictures
+
+if [[ -f $1 ]]
+then
+    mv $picsPATH/wallpaper.jpg $picsPATH/imgs/$RANDOM.jpg
+    cp $1 $picsPATH/wallpaper.jpg
+fi
+feh --bg-fill $picsPATH/wallpaper.jpg
