@@ -11,6 +11,7 @@ My dot files.
 - feh 
 - ranger 
 - scrot
+- xclip
 
 # Distro info
 - Arch linux
