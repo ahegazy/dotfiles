@@ -140,6 +140,4 @@ ex ()
 
 alias vi="vim"
 alias ll='ls -lah'
-alias stopTor='sudo systemctl stop tor && sudo killall -9 tor'
-alias reTor='stopTor ; sudo systemctl start tor'
 PATH=$PATH:$HOME/.local/bin

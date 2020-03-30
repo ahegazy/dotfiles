@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 8
+font pango:monospace 8
 #font pango:System San Francisco Display 8
 #font pango:simpofx 8
 #font pango:SourceCodePro 9
@@ -24,7 +24,7 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-font pango:arial 9
+#font pango:arial 9
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -119,15 +119,15 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Terminals"
-set $ws2 "2: B1"
+set $ws2 "2: Browser"
 set $ws3 "3: Editor"
 set $ws4 "4: Files"
-set $ws5 "5: B2"
-set $ws6 "6: media"
-set $ws7 "7: other"
-set $ws8 "8: misc"
-set $ws9 "9: misc"
-set $ws10 "10: misc"
+set $ws5 "5: Media"
+set $ws6 "6: Docs"
+set $ws7 "7: Misc"
+set $ws8 "8: Misc"
+set $ws9 "9: Misc"
+set $ws10 "10: Misc"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -186,10 +186,16 @@ bindsym $mod+Shift+KP_0 move container to workspace number $ws10
 assign [class="dolphin"] $ws4
 assign [class="firefox"] $ws2
 assign [class="code-oss"] $ws3 #visual studio code
-#assign [class="Opera"] $ws5 
-assign [class="vlc"] $ws6 
+assign [class="Opera"] $ws2 
+assign [class="vlc"] $ws5 
+assign [class="Gimp"] $ws5 
 assign [class="JDownloader"] $ws4
+assign [class="XpdfReader"] $ws6
+assign [class="DjView"] $ws6
 
+# change layout for certain worksapces
+for_window [class = "firefox"] layout stacking
+for_window [class = "Opera"] layout stacking
 # move focus to the workspace when app opens
 #for_window [class="."] focus 
 focus_on_window_activation focus
@@ -286,10 +292,10 @@ bindsym XF86AudioPrev exec playerctl previous
 
 #print screen when prtscr key is pressed, show a bar with options delete image, view image, and kill the nagbar when either is pressed
 #print part of screen 
-bindsym --release Print exec --no-startup-id scrot -s -f ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -9 i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -9 i3-nagbar"'
+bindsym --release Print exec --no-startup-id scrot -s -f ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f &&  killall -SIGHUP i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -SIGHUP i3-nagbar"'
 
 #print fullscreen  
-bindsym --release $mod+Print exec --no-startup-id scrot ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -9 i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -9 i3-nagbar"'
+bindsym --release $mod+Print exec --no-startup-id scrot ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -SIGHUP i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -SIGHUP i3-nagbar"'
 
 # toggle layout arabic/english 
 # Binding sym alt + key doesnot work as alt is consideret mod1
@@ -308,6 +314,7 @@ bindsym $mod+F12 exec --no-startup-id $HOME/exec/internet.sh toggleWifi
 #connect to wifi
 exec_always --no-startup-id $HOME/exec/internet.sh
 exec --no-startup-id $HOME/exec/netspeed.sh
+#exec --no-startup-id $HOME/exec/quranAyahGen.sh
 
 #default for xdg-open 
 #exec --no-startup-id xdg-mime default xpdf.desktop application/pdf #xpdf for viewing pdfs

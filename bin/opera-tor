@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# if an instance of opera-tor is running don't run it again, move to its workspace
+if [[ -z `pidof opera-tor` ]]
+then
+    # start tor
+    
+	sudo /usr/bin/systemctl start tor
+    torSerStat=`systemctl status tor | grep "dead"`
+
+    if [[ -n $torSerStat ]]
+    then
+        exec i3-nagbar -t error -m "Tor service is not running"   
+	else
+        torStat=`curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/ | cat | grep -m 1 Congratulations`
+        if [[ -z $torStat ]]
+        then
+            exec i3-nagbar -t error -m "Tor service is running but it's not connected"   
+        else
+
+            exec opera --proxy-server="socks5://127.0.0.1:9050" --user-data-dir="$HOME/.config/opera-tor" --disk-cache-dir="$HOME/.cache/opera-tor" &
+            operaPID=$!
+            exec i3-nagbar -t warning -m "Tor is running" -B 'retor' 'sudo /usr/bin/systemctl restart tor' -B 'kill it' "kill -1 $operaPID ; sudo /usr/bin/systemctl stop tor && killall -SIGHUP i3-nagbar" -B "tor status" "termite -e 'systemctl status tor'"
+            
+            # exec i3-msg 'workspace "5: B2"; exec opera --proxy-server="socks5://127.0.0.1:9050" --user-data-dir="$HOME/.config/opera-tor" --disk-cache-dir="$HOME/.cache/opera-tor"'
+                # stop tor when finished
+            # don't know why this doesnot work?
+            # exec sudo /usr/bin/systemctl stop tor
+        fi
+    fi
+else    
+    # browser is running go to its workspace 
+    exec i3-msg 'workspace "2: Browser"'
+    # exec i3-msg 'workspace "5: B2"'
+fi

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+[[ -z $1 ]] && echo "no op requested. USAGE: $0 {start,restart,stop}" && exit 1
+
+op=$1
+
+getTorStatus(){
+    local st=0
+    torSerStat=`systemctl status tor | grep "dead"`
+
+    if [[ -n $torSerStat ]]
+    then
+        # tor service is not running"
+        st=1
+    else
+        torStat=`curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/ | cat | grep -m 1 Congratulations`
+        if [[ -z $torStat ]]
+        then
+            #tor service is running but not connected"
+            st=2
+        fi
+    fi
+    echo $st
+}
+case $op in
+start)
+    sudo /usr/bin/systemctl start tor
+    st=$(getTorStatus)
+    case $st in
+    0)  
+        exec i3-nagbar -t warning -m "Tor is running" -B 'retor' 'myTor restart' -B 'kill it' "myTor stop" -B "tor status" "termite -e 'systemctl status tor'"
+        ;;
+    1)
+        exec i3-nagbar -t error -m "Tor service is not running"   
+        ;;
+    2)
+        exec i3-nagbar -t error -m "Tor service is running but it's not connected" -B 'reTor?' 'myTor restart'
+        ;;
+    esac
+    ;;
+restart)
+    myTor stop
+    myTor start
+    # sudo /usr/bin/systemctl restart tor
+    ;;
+stop)
+    #if [[ -n $2 ]]
+    #then
+    #    kill -1 $2 #pid of app to kill before tor
+    #fi
+    sudo /usr/bin/systemctl stop tor && killall -SIGHUP i3-nagbar
+    ;;
+*)
+    echo "op $op is not valid. USAGE: $0 {start,restart,stop}"
+    exit 2
+    ;;
+esac
+
+
