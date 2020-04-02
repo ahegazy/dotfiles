@@ -52,5 +52,5 @@ done
 
 echo uptime: $(uptime -p) 
 get_stat
-
+lsof -i
 

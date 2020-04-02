@@ -56,7 +56,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
+bindsym Mod1+F4 kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show run
@@ -124,7 +124,7 @@ set $ws3 "3: Editor"
 set $ws4 "4: Files"
 set $ws5 "5: Media"
 set $ws6 "6: Docs"
-set $ws7 "7: Misc"
+set $ws7 "7: MutliMedia"
 set $ws8 "8: Misc"
 set $ws9 "9: Misc"
 set $ws10 "10: Misc"
@@ -157,6 +157,7 @@ bindsym $mod+Mod2+KP_0 workspace number $ws10
 bindsym $mod+Mod2+KP_Add workspace next
 bindsym $mod+Mod2+KP_Subtract workspace prev
 bindsym $mod+Mod2+KP_Enter workspace back_and_forth
+bindsym $mod+Tab workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -188,7 +189,7 @@ assign [class="firefox"] $ws2
 assign [class="code-oss"] $ws3 #visual studio code
 assign [class="Opera"] $ws2 
 assign [class="vlc"] $ws5 
-assign [class="Gimp"] $ws5 
+assign [class="Gimp"] $ws7 
 assign [class="JDownloader"] $ws4
 assign [class="XpdfReader"] $ws6
 assign [class="DjView"] $ws6
@@ -196,6 +197,8 @@ assign [class="DjView"] $ws6
 # change layout for certain worksapces
 for_window [class = "firefox"] layout stacking
 for_window [class = "Opera"] layout stacking
+for_window [class = "XpdfReader"] layout stacking
+for_window [class = "DjView"] layout stacking
 # move focus to the workspace when app opens
 #for_window [class="."] focus 
 focus_on_window_activation focus

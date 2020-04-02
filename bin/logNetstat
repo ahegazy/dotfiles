@@ -9,8 +9,14 @@
 
 # Auto detect interfaces
 ifaces=$(ls /sys/class/net | grep -E '^(eth|wlan|enp|wlp|wlo)')
+ 
+if [[ `date +%d` < 06 ]]
+then
+    fileName="sessionsStat-0$((`date '+%m'`-1))$(date +%y).json"
+else
+    fileName="sessionsStat-$(date +%m%y).json"
+fi
 
-fileName="sessionsStat-$(date +%m%y).json"
 logPATH=/home/ahmad/log/$fileName
 
 readable() {

@@ -35,15 +35,24 @@ rate=""
 readable() {
   local bytes=$1
   local kib=$(( bytes >> 10 ))
+  local mib=$(( kib >> 10 ))
   if [ $kib -lt 0 ]; then
     echo "? K"
-  elif [ $kib -gt 1024 ]; then
+  elif [[ $kib -gt 1024 && $mib -lt 1024 ]]; then
     local mib_int=$(( kib >> 10 ))
     local mib_dec=$(( kib % 1024 * 976 / 10000 ))
     if [ "$mib_dec" -lt 10 ]; then
       mib_dec="0${mib_dec}"
     fi
     echo "${mib_int}.${mib_dec} M"
+  elif [ $mib -ge 1024 ]
+  then
+    local gib_int=$(( mib >> 10 ))
+    local gib_dec=$(( mib % 1024 * 976 / 10000 ))
+    if [ "$gib_dec" -lt 10 ]; then
+      gib_dec="0${gib_dec}"
+    fi
+    echo "${gib_int}.${gib_dec} G"
   else
     echo "${kib} K"
   fi
@@ -62,7 +71,7 @@ update_rate() {
 
   local interval=$(( $time - $last_time ))
   if [ $interval -gt 0 ]; then
-    rate="$(readable $(( (rx - last_rx) / interval )))↓ $(readable $(( (tx - last_tx) / interval )))↑"
+      rate="($(readable ${rx})↓ $(readable ${tx})↑)$(readable $(( (rx - last_rx) / interval )))↓ $(readable $(( (tx - last_tx) / interval )))↑"
   else
     rate=""
   fi
@@ -75,7 +84,8 @@ update_rate() {
 while :
 do
     update_rate
-    echo $rate > ~/.config/netrate
+    uptime=$(uptime -p | cut --complement -d ' ' -f 1)
+    echo "$uptime | $rate" > ~/.config/netrate
 
     sleep 3
 done

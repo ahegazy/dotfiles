@@ -3,7 +3,7 @@
 if [[ -z `pidof opera-vpn` ]]
 then
 
-    exec opera --user-data-dir="$HOME/.config/opera-vpn" --disk-cache-dir="$HOME/.cache/opera-vpn"
+    exec opera --disable-update --disable-background-networking --user-data-dir="$HOME/.config/opera-vpn" --disk-cache-dir="$HOME/.cache/opera-vpn"
 #    exec i3-msg 'workspace "5: B2"; exec opera --user-data-dir="$HOME/.config/opera-vpn" --disk-cache-dir="$HOME/.cache/opera-vpn"'
 
 else
