@@ -191,6 +191,7 @@ assign [class="Opera"] $ws2
 assign [class="vlc"] $ws5 
 assign [class="Gimp"] $ws7 
 assign [class="JDownloader"] $ws4
+assign [class="qBittorrent"] $ws4
 assign [class="XpdfReader"] $ws6
 assign [class="DjView"] $ws6
 
@@ -264,9 +265,12 @@ bar {
     position top
     #mode hide
     output primary
-    #tray_output none 
+    tray_output none 
     separator_symbol ⁞
 
+    #strip_workspace_numbers yes
+    workspace_buttons no
+    binding_mode_indicator yes 
     colors {
 		background $bg-color
 	    	separator #757575
@@ -277,12 +281,32 @@ bar {
 	}
 }
 
+bar {
+    
+    position bottom
+    #mode hide
+    #output primary
+    #tray_output none 
+    #separator_symbol ⁞
+
+    #strip_workspace_numbers yes
+    #workspace_buttons no
+    binding_mode_indicator yes 
+    colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
 #lock screen 
 bindsym $mod+shift+x exec $HOME/.local/bin/lockscreen #i3lock --color "$bg-color"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 2 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
 
 bindsym $mod+F3 exec xbacklight -inc 20 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
 bindsym $mod+F2 exec xbacklight -dec 20 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
@@ -321,4 +345,7 @@ exec --no-startup-id $HOME/exec/netspeed.sh
 
 #default for xdg-open 
 #exec --no-startup-id xdg-mime default xpdf.desktop application/pdf #xpdf for viewing pdfs
-#exec --no-startup-id xdg-mime default ranger.desktop inode/directory #ranger for directory open 
+#exec --no-startup-id xdg-mime default ranger.desktop inode/directory #ranger for directory open
+
+# redshift 
+exec --no-startup-id redshift

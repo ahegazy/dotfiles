@@ -32,7 +32,14 @@ do
     [[ ! -r $f ]] && echo "cannot read file $f."&& break
     echo "######## ${f##*/} ########"
 
-    totaljson=$(cat $f | sed '$ s/.$/]/')
+
+    totaljson=$(cat $f)
+    #totaljson=$(cat $f | sed '$ s/.$/]/')
+    # write [ and ] at the start and end of the text to decalre it as an array of json
+    [[ -z $(head -c 1 $f | grep '\[') ]] && totaljson=$(echo "[$totaljson")
+    [[ -n $(tail -c 2 $f | grep ',')  ]] && totaljson=$(echo $totaljson | sed '$ s/.$//')
+    [[ -z $(tail -c 2 $f | grep '\]') ]] && totaljson=$(echo "$totaljson]")
+
 
     if [[ $1 == "-v" ]]
     then

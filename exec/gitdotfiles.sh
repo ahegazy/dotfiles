@@ -10,3 +10,5 @@ cp $HOME/exec/* $gitPATH/exec/
 cp $HOME/.local/bin/* $gitPATH/bin/
 cp $HOME/.bashrc $gitPATH/
 cp $HOME/.vimrc $gitPATH/
+cp $HOME/.xpdfrc $gitPATH/
+cp $HOME/.config/redshift.conf $gitPATH/redshift.conf

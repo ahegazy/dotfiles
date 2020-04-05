@@ -85,7 +85,7 @@ while :
 do
     update_rate
     uptime=$(uptime -p | cut --complement -d ' ' -f 1)
-    echo "$uptime | $rate" > ~/.config/netrate
+    echo "[$uptime] $rate" > ~/.config/netrate
 
     sleep 3
 done

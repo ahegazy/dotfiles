@@ -24,6 +24,7 @@ getTorStatus(){
 }
 case $op in
 start)
+    # /usr/bin/systemctl is put in the sudoers file as not to require password for this user .. 
     sudo /usr/bin/systemctl start tor
     st=$(getTorStatus)
     case $st in
