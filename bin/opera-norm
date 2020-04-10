@@ -1,12 +1,4 @@
 #!/bin/bash
 
-if [[ -z `pidof opera-norm` ]]
-then
-    exec /usr/lib/opera/opera --disable-update --disable-background-networking --user-data-dir="$HOME/.config/opera-norm" $@
-#    exec i3-msg 'workspace "2: B1"; exec opera --user-data-dir="$HOME/.config/opera-norm"'
-else
-    # browser is running fo to its workspace 
+exec /usr/lib/opera/opera --disable-update --disable-background-networking --user-data-dir="$HOME/.config/opera-norm" --new-tab $@
 
-    exec i3-msg 'workspace "2: Browser"'
-    #exec i3-msg 'workspace "2: B1"'
-fi

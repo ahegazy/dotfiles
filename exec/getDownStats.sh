@@ -51,8 +51,8 @@ do
 
     sumDown=0
     sumUP=0
-    for num in `echo $totaljson | jq '.[].total_download.bytes' | tr -d '"'`;do sumDown=$((sumDown+num));done
-    for num in `echo $totaljson | jq '.[].total_upload.bytes' | tr -d '"'`;do sumUP=$((sumUP+num));done
+    for num in `echo $totaljson | jq -r '.[].total_download.bytes'`;do sumDown=$((sumDown+num));done
+    for num in `echo $totaljson | jq -r '.[].total_upload.bytes'`;do sumUP=$((sumUP+num));done
 
     echo "Total Download: " $(readable ${sumDown})
     echo "Total Upload: " $(readable ${sumUP})

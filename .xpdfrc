@@ -84,7 +84,9 @@ fontDir		/home/ahmad/.fonts/
 # Set the command used to run a web browser when a URL hyperlink is
 # clicked.
 
-launchCommand  xdg-open
+launchCommand  /home/ahmad/.local/bin/opera-norm
+
+#xdg-open
 
 # startup settings
 initialSidebarState no

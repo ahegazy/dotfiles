@@ -30,6 +30,7 @@ then
     fi
 else    
     # browser is running go to its workspace 
-    exec i3-msg 'workspace "2: Browser"'
+    exec /usr/lib/opera/opera --disable-update --disable-background-networking --proxy-server="socks5://127.0.0.1:9050" --user-data-dir="$HOME/.config/opera-tor" --disk-cache-dir="$HOME/.cache/opera-tor" --new-tab $@ 
+    #exec i3-msg 'workspace "2: Browser"'
     # exec i3-msg 'workspace "5: B2"'
 fi

@@ -125,8 +125,8 @@ set $ws4 "4: Files"
 set $ws5 "5: Media"
 set $ws6 "6: Docs"
 set $ws7 "7: MutliMedia"
-set $ws8 "8: Misc"
-set $ws9 "9: Misc"
+set $ws8 "8: Social"
+set $ws9 "9: TODO"
 set $ws10 "10: Misc"
 
 # switch to workspace
@@ -194,12 +194,14 @@ assign [class="JDownloader"] $ws4
 assign [class="qBittorrent"] $ws4
 assign [class="XpdfReader"] $ws6
 assign [class="DjView"] $ws6
+assign [class="discord"] $ws8
+assign [class="Gvim"] $ws3
 
 # change layout for certain worksapces
 for_window [class = "firefox"] layout stacking
 for_window [class = "Opera"] layout stacking
-for_window [class = "XpdfReader"] layout stacking
-for_window [class = "DjView"] layout stacking
+#for_window [class = "XpdfReader"] layout stacking
+#for_window [class = "DjView"] layout stacking
 # move focus to the workspace when app opens
 #for_window [class="."] focus 
 focus_on_window_activation focus
@@ -342,10 +344,12 @@ bindsym $mod+F12 exec --no-startup-id $HOME/exec/internet.sh toggleWifi
 exec_always --no-startup-id $HOME/exec/internet.sh
 exec --no-startup-id $HOME/exec/netspeed.sh
 #exec --no-startup-id $HOME/exec/quranAyahGen.sh
+exec --no-startup-id exec i3-msg 'workspace "9: TODO"' 
+exec --no-startup-id termite -e "vim /home/ahmad/Documents/TODO"
 
 #default for xdg-open 
 #exec --no-startup-id xdg-mime default xpdf.desktop application/pdf #xpdf for viewing pdfs
 #exec --no-startup-id xdg-mime default ranger.desktop inode/directory #ranger for directory open
 
 # redshift 
-exec --no-startup-id redshift
+#exec --no-startup-id redshift -P
