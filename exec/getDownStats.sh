@@ -49,6 +49,9 @@ do
         echo $totaljson | jq '.[] | [.date,.uptime,.total_download.human] | @csv' | tr -d '\\"' | grep --color -E "[[:digit:]]* hour.||[[:digit:]]* minutes"
     fi
 
+    #maxD=0
+    #minD=99999999999
+    #  [[ $minD > $num ]] && minD=$num;[[ $maxD < $num ]] && maxD=$num;
     sumDown=0
     sumUP=0
     for num in `echo $totaljson | jq -r '.[].total_download.bytes'`;do sumDown=$((sumDown+num));done
@@ -56,5 +59,7 @@ do
 
     echo "Total Download: " $(readable ${sumDown})
     echo "Total Upload: " $(readable ${sumUP})
+#    echo "Maximum Download: " $(readable ${maxD})
+#    echo "Minimum Download: " $(readable ${minD})
     #cat sessionStat.json | sed '$ s/.$/]/' | jq '.[].total_download.human'
 done

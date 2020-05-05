@@ -196,7 +196,7 @@ assign [class="XpdfReader"] $ws6
 assign [class="DjView"] $ws6
 assign [class="discord"] $ws8
 assign [class="Gvim"] $ws3
-
+assign [class="ReText"] $ws3
 # change layout for certain worksapces
 for_window [class = "firefox"] layout stacking
 for_window [class = "Opera"] layout stacking
@@ -321,7 +321,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 #print screen when prtscr key is pressed, show a bar with options delete image, view image, and kill the nagbar when either is pressed
 #print part of screen 
-bindsym --release Print exec --no-startup-id scrot -s -f ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f &&  killall -SIGHUP i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -SIGHUP i3-nagbar"'
+bindsym --release Print exec --no-startup-id scrot -s -f ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f &&  killall -SIGHUP i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "copy path to clipboard?" "echo $f | xclip -selection clipboard" -B "delete image?" "rm $f && killall -SIGHUP i3-nagbar"'
 
 #print fullscreen  
 bindsym --release $mod+Print exec --no-startup-id scrot ~/Pictures/shots/%Y-%m-%d_$wx$h.png -e 'i3-nagbar -t warning -m "image saved at $f" -B "view image?" "feh --scale-down $f && killall -SIGHUP i3-nagbar" -B "copy to clipboard?" "xclip -selection clipboard -t image/png -i $f" -B "delete image?" "rm $f && killall -SIGHUP i3-nagbar"'
