@@ -266,7 +266,7 @@ bar {
     
     position top
     #mode hide
-    output primary
+    #output primary
     tray_output none 
     separator_symbol ⁞
 
@@ -306,12 +306,13 @@ bar {
 #lock screen 
 bindsym $mod+shift+x exec $HOME/.local/bin/lockscreen #i3lock --color "$bg-color"
 
+## controlling brightness using package light-git from AUR 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 2 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 5 && light -G > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 2 && light -G > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
 
-bindsym $mod+F3 exec xbacklight -inc 20 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
-bindsym $mod+F2 exec xbacklight -dec 20 && xbacklight -get > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
+bindsym $mod+F3 exec light -A 20 && light -G > $HOME/.config/brightness && $refresh_i3status # increase screen brightness
+bindsym $mod+F2 exec light -U 20 && light -G > $HOME/.config/brightness && $refresh_i3status # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -353,3 +354,7 @@ exec --no-startup-id termite -e "vim /home/ahmad/Documents/TODO"
 
 # redshift 
 #exec --no-startup-id redshift -P
+#
+# Optimus manager 
+
+exec --no-startup-id /usr/bin/prime-offload

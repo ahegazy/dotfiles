@@ -141,3 +141,5 @@ ex ()
 alias vi="vim"
 alias ll='ls -lah'
 PATH=$PATH:$HOME/.local/bin
+export VISUAL="vim"
+
